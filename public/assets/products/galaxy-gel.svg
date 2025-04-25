@@ -1,0 +1,12 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="160" rx="10" fill="#F3F4F6" />
+  <rect x="30" y="40" width="100" height="80" rx="8" fill="#4B2F7F" />
+  <rect x="45" y="30" width="70" height="20" rx="10" fill="#4B2F7F" />
+  <rect x="45" y="20" width="70" height="10" rx="5" fill="#4B2F7F" />
+  <circle cx="70" cy="60" r="5" fill="#D6BCFA" />
+  <circle cx="90" cy="80" r="5" fill="#D6BCFA" />
+  <circle cx="60" cy="90" r="3" fill="#D6BCFA" />
+  <circle cx="100" cy="60" r="3" fill="#D6BCFA" />
+  <circle cx="80" cy="70" r="10" fill="#9B87F5" />
+  <text x="80" y="130" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="16" fill="#6F45D3">GALAXY GEL</text>
+</svg> 

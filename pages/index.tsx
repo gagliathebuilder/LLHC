@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Head from "next/head";
+import Link from "next/link";
 
 // Product data
 const products = [
@@ -49,13 +50,18 @@ export default function Home() {
       <div className="min-h-screen hero-gradient flex flex-col">
         {/* Hero Section */}
         <header className="container mx-auto pt-8 px-4 sm:px-6 lg:px-8">
-          <div className="relative h-16 sm:h-20 w-48">
-            <Image 
-              src="/images/31c02903-214b-427a-b5e4-8de90ca8c0fb.png" 
-              alt="Little Legends Hold Co. Logo" 
-              fill
-              style={{ objectFit: 'contain' }}
-            />
+          <div className="flex justify-between items-center">
+            <div className="relative h-16 sm:h-20 w-48">
+              <Image 
+                src="/images/31c02903-214b-427a-b5e4-8de90ca8c0fb.png" 
+                alt="Little Legends Hold Co. Logo" 
+                fill
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <Link href="/coming-soon" className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full transition">
+              New Design
+            </Link>
           </div>
         </header>
 
