@@ -67,14 +67,14 @@ const Home = () => {
         <main className="flex-grow flex flex-col items-center justify-center text-center">
           <div className="w-full px-6 py-16 bg-[#FDF8F5]">
             <div className="max-w-2xl mx-auto mb-16">
-              <div className="mx-auto mb-8 relative w-[540px] h-[540px]">
+              <div className="mx-auto mb-8 relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]">
                 <Image 
                   src="/images/31c02903-214b-427a-b5e4-8de90ca8c0fb.png"
                   alt="Little Legends Hold Co. Logo" 
-                  width={540}
-                  height={540}
+                  fill
                   style={{ objectFit: 'contain' }}
                   priority
+                  className="p-4"
                 />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-ll-purple mb-4 font-fredoka">
