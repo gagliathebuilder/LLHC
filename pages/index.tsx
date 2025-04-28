@@ -66,8 +66,8 @@ const Home = () => {
 
         <main className="flex-grow flex flex-col items-center justify-center text-center">
           <div className="w-full px-6 py-16 bg-[#FDF8F5]">
-            <div className="max-w-2xl mx-auto mb-16">
-              <div className="mx-auto mb-8 relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]">
+            <div className="max-w-4xl mx-auto mb-16">
+              <div className="mx-auto mb-8 relative w-[400px] h-[400px] sm:w-[600px] sm:h-[600px]">
                 <Image 
                   src="/images/logo.png"
                   alt="Little Legends Hold Co. Logo" 
@@ -107,25 +107,19 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Product section with improved layout */}
+          {/* Product Teaser section */}
           <div className="w-full py-16 bg-[#7B68EE]" id="products">
             <div className="container mx-auto px-6">
-              <h2 className="text-3xl md:text-4xl font-bold mb-16 text-white font-fredoka text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white font-fredoka text-center">
                 Legendary Products Coming Soon
               </h2>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 max-w-6xl mx-auto">
                 {products.map((product, index) => (
-                  <div key={index} className="bg-[#8A7CFC] rounded-xl p-5">
-                    <div className="bg-white rounded-xl p-4 mb-6 h-[190px] flex items-center justify-center">
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={product.image}
-                          alt={product.title}
-                          fill
-                          style={{ objectFit: 'contain', padding: '10px' }}
-                          priority={index < 2}
-                        />
+                  <div key={index} className="bg-[#8A7CFC] rounded-xl p-5 backdrop-blur-lg">
+                    <div className="bg-white/10 rounded-xl p-4 mb-6 h-[190px] flex items-center justify-center">
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        <h3 className="text-2xl font-bold text-white mb-2 font-fredoka text-center">Coming Soon</h3>
                       </div>
                     </div>
                     <h3 className="text-xl font-bold text-ll-yellow mb-2 font-fredoka text-center">{product.title}</h3>
