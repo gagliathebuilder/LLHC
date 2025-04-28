@@ -69,7 +69,7 @@ const Home = () => {
             <div className="max-w-2xl mx-auto mb-16">
               <div className="mx-auto mb-8 relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]">
                 <Image 
-                  src="/images/31c02903-214b-427a-b5e4-8de90ca8c0fb.png"
+                  src="/images/logo.png"
                   alt="Little Legends Hold Co. Logo" 
                   fill
                   style={{ objectFit: 'contain' }}
