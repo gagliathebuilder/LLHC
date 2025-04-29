@@ -7,32 +7,28 @@ import Head from 'next/head';
 // Product data
 const products = [
   {
-    title: "Ocean Adventures Await",
-    description: "Tear-free wash. Beach-ready smiles. Built for little legends who conquer the tides.",
-    image: "/images/Ocean Adventures Await Logo Design.png",
-    color: "bg-blue-100",
-    hoverColor: "hover:bg-blue-200"
+    title: "🦸 Supercharged Confidence",
+    description: "Transform into a confident champion with our cape-inspired style that makes every day feel like a superhero adventure.",
+    image: "/images/Red Cape with Starburst Background.png",
+    alt: "Red cape with starburst background"
   },
   {
-    title: "Jurassic Styling Power",
-    description: "Roar-worthy hold. Wild-day tested. Adventure-ready hair for your little explorer.",
-    image: "/images/Jurassic Styling Power for Kids.png",
-    color: "bg-green-100",
-    hoverColor: "hover:bg-green-200"
-  },
-  {
-    title: "Out-of-This-World Shine",
+    title: "🚀 Out-of-This-World Shine",
     description: "Galactic hold. Stellar style. Launch your hairstyle into orbit.",
-    image: "/images/Rocket to Galactic Style.png",
-    color: "bg-purple-100",
-    hoverColor: "hover:bg-purple-200"
+    image: "/images/Purple Rocket in Lavender Sky.png",
+    alt: "Purple rocket in lavender sky"
   },
   {
-    title: "Supercharged Confidence",
-    description: "Everyday heroes need legendary hair. Strong hold. Easy washout. Parent-approved.",
-    image: "/images/Supercharged Confidence for Little Legends (1).png",
-    color: "bg-red-100",
-    hoverColor: "hover:bg-red-200"
+    title: "🌊 Ocean Adventures Await",
+    description: "Tear-free wash. Beach-ready smiles. Built for little legends who conquer the tides.",
+    image: "/images/Minimalist Blue Wave and Stars.png",
+    alt: "Minimalist blue wave with stars"
+  },
+  {
+    title: "🦖 Jurassic Styling Power",
+    description: "Roar-worthy hold. Wild-day tested. Adventure-ready hair for your little explorer.",
+    image: "/images/Dinosaur Footprint with Green Leaves.png",
+    alt: "Dinosaur footprint with green leaves"
   }
 ];
 
@@ -115,34 +111,35 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Product Teaser section */}
-          <div className="w-full py-16 bg-[#7B68EE]" id="products">
+          {/* Legendary Products Section */}
+          <div className="w-full py-16 bg-white" id="products">
             <div className="container mx-auto px-6">
-              <h2 className="text-3xl md:text-4xl font-bold mb-12 text-white font-fredoka text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-12 text-[#2D2D2D] font-fredoka text-center">
                 Legendary Products Coming Soon
               </h2>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
                 {products.map((product, index) => (
                   <div 
                     key={index} 
-                    className={`rounded-xl p-6 transform transition-all duration-300 hover:scale-105 ${product.color} ${product.hoverColor}`}
+                    className="bg-white rounded-2xl p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] text-center 
+                             transform transition-transform duration-300 hover:-translate-y-1"
                   >
-                    <div className="mb-6 h-[200px] flex items-center justify-center">
-                      <div className="relative w-full h-full">
+                    <div className="mb-6 h-[100px] flex items-center justify-center">
+                      <div className="relative w-[100px] h-[100px]">
                         <Image
                           src={product.image}
-                          alt={product.title}
+                          alt={product.alt}
                           fill
                           style={{ objectFit: 'contain' }}
                           priority={index < 2}
                         />
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-ll-purple mb-3 font-fredoka text-center">
+                    <h3 className="text-xl font-extrabold text-[#1a1a1a] mb-2 font-fredoka tracking-tight">
                       {product.title}
                     </h3>
-                    <p className="text-gray-700 text-center px-2 leading-relaxed">
+                    <p className="text-[0.95rem] text-[#555] leading-relaxed">
                       {product.description}
                     </p>
                   </div>
