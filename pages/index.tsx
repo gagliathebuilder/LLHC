@@ -63,70 +63,71 @@ const Home = () => {
       <Head>
         <title>Coming Soon | Little Legends Hold Co.</title>
         <meta name="description" content="For boys who dream big, play hard, and rock great hair. Tear-free. Parent-approved. 100% kid-cool." />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </Head>
       
       <div className="flex flex-col min-h-screen bg-[#FDF8F5] text-gray-900">
         <Navbar />
 
         <main className="flex-grow flex flex-col items-center justify-center text-center">
-          <div className="w-full px-6 py-16 bg-[#FDF8F5]">
-            <div className="max-w-4xl mx-auto mb-16">
-              <div className="mx-auto mb-8 relative w-[400px] h-[400px] sm:w-[600px] sm:h-[600px]">
+          <div className="w-full px-4 sm:px-6 py-12 sm:py-16 bg-[#FDF8F5]">
+            <div className="max-w-4xl mx-auto mb-12 sm:mb-16">
+              <div className="mx-auto mb-6 sm:mb-8 relative w-[280px] h-[280px] xs:w-[400px] xs:h-[400px] sm:w-[600px] sm:h-[600px]">
                 <Image 
                   src="/images/logo.png"
                   alt="Little Legends Hold Co. Logo" 
                   fill
                   style={{ objectFit: 'contain' }}
                   priority
-                  className="p-4"
+                  className="p-2 sm:p-4"
                 />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-ll-purple mb-4 font-fredoka">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ll-purple mb-3 sm:mb-4 font-fredoka">
                 Legendary Grooming is Coming Soon
               </h1>
-              <p className="text-lg md:text-xl mb-8 text-gray-700">
+              <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-700 px-4 sm:px-0">
                 For boys who dream big, play hard, and rock great hair. Tear-free. Parent-approved. 100% kid-cool.
               </p>
 
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4">
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 px-4 sm:px-0">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="px-4 py-3 w-full sm:w-auto flex-1 border border-ll-purple/30 rounded-full focus:ring-2 focus:ring-ll-purple/40"
+                  className="px-4 py-3 w-full sm:w-auto flex-1 border border-ll-purple/30 rounded-full focus:ring-2 focus:ring-ll-purple/40 min-h-[48px]"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
                 <button
                   type="submit"
-                  className="bg-ll-purple text-white px-6 py-3 rounded-full hover:bg-ll-purple-dark transition font-semibold"
+                  className="w-full sm:w-auto bg-ll-purple text-white px-6 py-3 rounded-full hover:bg-ll-purple-dark transition font-semibold min-h-[48px]"
                 >
                   Join the Club
                 </button>
               </form>
 
-              <p className="text-sm mt-4 text-gray-500">
+              <p className="text-sm mt-4 text-gray-500 px-4 sm:px-0">
                 Get early access, styling tips, and special launch-day deals.
               </p>
             </div>
           </div>
 
           {/* Legendary Products Section */}
-          <div className="w-full py-16 bg-white" id="products">
-            <div className="container mx-auto px-6">
-              <h2 className="text-3xl md:text-4xl font-bold mb-12 text-[#2D2D2D] font-fredoka text-center">
+          <div className="w-full py-12 sm:py-16 bg-white" id="products">
+            <div className="container mx-auto px-4 sm:px-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-[#2D2D2D] font-fredoka text-center">
                 Legendary Products Coming Soon
               </h2>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-7xl mx-auto">
                 {products.map((product, index) => (
                   <div 
                     key={index} 
-                    className="bg-white rounded-2xl p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] text-center 
+                    className="bg-white rounded-2xl p-4 sm:p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] text-center 
                              transform transition-transform duration-300 hover:-translate-y-1"
                   >
-                    <div className="mb-6 h-[100px] flex items-center justify-center">
-                      <div className="relative w-[100px] h-[100px]">
+                    <div className="mb-4 sm:mb-6 h-[80px] sm:h-[100px] flex items-center justify-center">
+                      <div className="relative w-[80px] sm:w-[100px] h-[80px] sm:h-[100px]">
                         <Image
                           src={product.image}
                           alt={product.alt}
@@ -136,10 +137,10 @@ const Home = () => {
                         />
                       </div>
                     </div>
-                    <h3 className="text-xl font-extrabold text-[#1a1a1a] mb-2 font-fredoka tracking-tight">
+                    <h3 className="text-lg sm:text-xl font-extrabold text-[#1a1a1a] mb-2 font-fredoka tracking-tight">
                       {product.title}
                     </h3>
-                    <p className="text-[0.95rem] text-[#555] leading-relaxed">
+                    <p className="text-[0.9rem] sm:text-[0.95rem] text-[#555] leading-relaxed">
                       {product.description}
                     </p>
                   </div>
@@ -149,28 +150,28 @@ const Home = () => {
           </div>
 
           {/* Features section */}
-          <div className="w-full px-6 py-16 bg-[#FDF8F5]">
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center max-w-5xl mx-auto">
-              <div className="bg-white rounded-lg p-6 shadow-sm">
+          <div className="w-full px-4 sm:px-6 py-12 sm:py-16 bg-[#FDF8F5]">
+            <section className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-center max-w-5xl mx-auto">
+              <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm min-h-[160px] flex flex-col items-center justify-center">
                 <div className="text-yellow-400 text-3xl mb-2">🛡️</div>
                 <h3 className="font-bold text-lg text-ll-purple">Safe Ingredients</h3>
                 <p className="text-sm text-gray-600 mt-2">Formulated for sensitive skin and eyes.</p>
               </div>
-              <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm min-h-[160px] flex flex-col items-center justify-center">
                 <div className="text-red-400 text-3xl mb-2">⚡</div>
                 <h3 className="font-bold text-lg text-ll-purple">Strong Hold</h3>
                 <p className="text-sm text-gray-600 mt-2">Lasts through recess, sports, and superhero missions.</p>
               </div>
-              <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm min-h-[160px] flex flex-col items-center justify-center">
                 <div className="text-blue-400 text-3xl mb-2">🧪</div>
                 <h3 className="font-bold text-lg text-ll-purple">Easy Washout</h3>
                 <p className="text-sm text-gray-600 mt-2">No more bath-time battles.</p>
               </div>
             </section>
 
-            <div className="mt-16 bg-ll-purple/5 p-8 rounded-xl max-w-3xl mx-auto text-center" id="about">
+            <div className="mt-12 sm:mt-16 bg-ll-purple/5 p-6 sm:p-8 rounded-xl max-w-3xl mx-auto text-center" id="about">
               <h3 className="text-xl font-bold text-ll-purple mb-2">Dad Built. Kid Tested.</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 text-sm sm:text-base">
                 At Little Legends, we get it. Getting kids out the door with great hair shouldn't be a struggle.
                 We're dads who've been there—and kids who know what works. Our mission: epic style, safe ingredients,
                 and hair products boys actually want to use.
