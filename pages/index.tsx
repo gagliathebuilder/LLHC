@@ -4,39 +4,15 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Head from 'next/head';
 
-// Product data
-const products = [
-  {
-    title: "🦸 Supercharged Confidence",
-    description: "Transform into a confident champion with our cape-inspired style that makes every day feel like a superhero adventure.",
-    image: "/images/Red Cape with Starburst Background.png",
-    alt: "Red cape with starburst background"
-  },
-  {
-    title: "🚀 Out-of-This-World Shine",
-    description: "Galactic hold. Stellar style. Launch your hairstyle into orbit.",
-    image: "/images/Purple Rocket in Lavender Sky.png",
-    alt: "Purple rocket in lavender sky"
-  },
-  {
-    title: "🌊 Ocean Adventures Await",
-    description: "Tear-free wash. Beach-ready smiles. Built for little legends who conquer the tides.",
-    image: "/images/Minimalist Blue Wave and Stars.png",
-    alt: "Minimalist blue wave with stars"
-  },
-  {
-    title: "🦖 Jurassic Styling Power",
-    description: "Roar-worthy hold. Wild-day tested. Adventure-ready hair for your little explorer.",
-    image: "/images/Dinosaur Footprint with Green Leaves.png",
-    alt: "Dinosaur footprint with green leaves"
-  }
-];
-
 const Home = () => {
   const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus('loading');
+
     try {
       const response = await fetch('/api/subscribe', {
         method: 'POST',
@@ -46,17 +22,51 @@ const Home = () => {
         body: JSON.stringify({ email }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to subscribe');
+        throw new Error(data.error || 'Failed to subscribe');
       }
 
-      alert('Thanks for joining! We\'ll notify you when we launch.');
+      setStatus('success');
+      setMessage(data.error === 'Email already subscribed' 
+        ? "You're already part of the Legend Club!" 
+        : "You're in. Welcome to the Legend Club!");
       setEmail('');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Subscription error:', error);
-      alert('Sorry, there was an error. Please try again later.');
+      setStatus('error');
+      setMessage(error.message || 'Oops! Something went wrong. Please try again.');
     }
   };
+
+  // Product data
+  const products = [
+    {
+      title: "🦸 Supercharged Confidence",
+      description: "Transform into a confident champion with our cape-inspired style that makes every day feel like a superhero adventure.",
+      image: "/images/Red Cape with Starburst Background.png",
+      alt: "Red cape with starburst background"
+    },
+    {
+      title: "🚀 Out-of-This-World Shine",
+      description: "Galactic hold. Stellar style. Launch your hairstyle into orbit.",
+      image: "/images/Purple Rocket in Lavender Sky.png",
+      alt: "Purple rocket in lavender sky"
+    },
+    {
+      title: "🌊 Ocean Adventures Await",
+      description: "Tear-free wash. Beach-ready smiles. Built for little legends who conquer the tides.",
+      image: "/images/Minimalist Blue Wave and Stars.png",
+      alt: "Minimalist blue wave with stars"
+    },
+    {
+      title: "🦖 Jurassic Styling Power",
+      description: "Roar-worthy hold. Wild-day tested. Adventure-ready hair for your little explorer.",
+      image: "/images/Dinosaur Footprint with Green Leaves.png",
+      alt: "Dinosaur footprint with green leaves"
+    }
+  ];
 
   return (
     <>
@@ -89,26 +99,41 @@ const Home = () => {
                 For boys who dream big, play hard, and rock great hair. Tear-free. Parent-approved. 100% kid-cool.
               </p>
 
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 px-4 sm:px-0">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="px-4 py-3 w-full sm:w-auto flex-1 border border-ll-purple/30 rounded-full focus:ring-2 focus:ring-ll-purple/40 min-h-[48px]"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <button
-                  type="submit"
-                  className="w-full sm:w-auto bg-ll-purple text-white px-6 py-3 rounded-full hover:bg-ll-purple-dark transition font-semibold min-h-[48px]"
-                >
-                  Join the Club
-                </button>
-              </form>
+              {/* Email Signup Form */}
+              <div className="w-full max-w-2xl mx-auto">
+                <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
+                  <div className="flex flex-col sm:flex-row w-full items-center gap-3">
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      className="w-full sm:flex-1 px-4 py-3 rounded-full border border-ll-purple/30 focus:ring-2 focus:ring-ll-purple/40 focus:outline-none min-h-[48px]"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      disabled={status === 'loading' || status === 'success'}
+                    />
+                    <button
+                      type="submit"
+                      disabled={status === 'loading' || status === 'success'}
+                      className="w-full sm:w-auto bg-ll-purple text-white px-8 py-3 rounded-full font-semibold min-h-[48px] 
+                               hover:transform hover:scale-105 transition-all duration-200 disabled:opacity-50
+                               hover:bg-ll-purple-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ll-purple"
+                    >
+                      {status === 'loading' ? 'Joining...' : 'Join the Club'}
+                    </button>
+                  </div>
+                  
+                  {message && (
+                    <div className={`text-center ${status === 'error' ? 'text-red-500' : 'text-green-600'}`}>
+                      {message}
+                    </div>
+                  )}
 
-              <p className="text-sm mt-4 text-gray-500 px-4 sm:px-0">
-                Get early access, styling tips, and special launch-day deals.
-              </p>
+                  <p className="text-sm text-gray-500">
+                    No spam. Just epic updates and launch-day surprises.
+                  </p>
+                </form>
+              </div>
             </div>
           </div>
 
@@ -186,4 +211,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home; 
