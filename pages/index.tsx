@@ -9,28 +9,28 @@ const products = [
   {
     title: "Ocean Adventures Await",
     description: "Tear-free wash. Beach-ready smiles. Built for little legends who conquer the tides.",
-    image: "/images/ocean_adventures_await.png",
+    image: "/images/Ocean Adventures Await Logo Design.png",
     color: "bg-blue-100",
     hoverColor: "hover:bg-blue-200"
   },
   {
     title: "Jurassic Styling Power",
     description: "Roar-worthy hold. Wild-day tested. Adventure-ready hair for your little explorer.",
-    image: "/images/jurassic_styling_power.png",
+    image: "/images/Jurassic Styling Power for Kids.png",
     color: "bg-green-100",
     hoverColor: "hover:bg-green-200"
   },
   {
     title: "Out-of-This-World Shine",
     description: "Galactic hold. Stellar style. Launch your hairstyle into orbit.",
-    image: "/images/out_of_this_world_shine.png",
+    image: "/images/Rocket to Galactic Style.png",
     color: "bg-purple-100",
     hoverColor: "hover:bg-purple-200"
   },
   {
     title: "Supercharged Confidence",
     description: "Everyday heroes need legendary hair. Strong hold. Easy washout. Parent-approved.",
-    image: "/images/supercharged_confidence.png",
+    image: "/images/Supercharged Confidence for Little Legends (1).png",
     color: "bg-red-100",
     hoverColor: "hover:bg-red-200"
   }
