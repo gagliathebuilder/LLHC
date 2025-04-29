@@ -4,28 +4,36 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Head from 'next/head';
 
-// Correctly ordered products with proper images and descriptions
+// Product data
 const products = [
   {
-    title: "Hero Hold",
-    image: "/images/b69b8648-6f32-4d4a-8503-769acc801de8.png",
-    description: "Styling Cream – Strong hold, easy rinse. For superheroes on the go."
+    title: "Ocean Adventures Await",
+    description: "Tear-free wash. Beach-ready smiles. Built for little legends who conquer the tides.",
+    image: "/images/ocean_adventures_await.png",
+    color: "bg-blue-100",
+    hoverColor: "hover:bg-blue-200"
   },
   {
-    title: "Shark Bait",
-    image: "/images/f49f29ab-615e-4ac5-a97a-c6204f90fb46.png",
-    description: "Shampoo & Conditioner – Gentle, tear-free, bath-time win."
+    title: "Jurassic Styling Power",
+    description: "Roar-worthy hold. Wild-day tested. Adventure-ready hair for your little explorer.",
+    image: "/images/jurassic_styling_power.png",
+    color: "bg-green-100",
+    hoverColor: "hover:bg-green-200"
   },
   {
-    title: "Dino Glue",
-    image: "/images/6ebdf7e8-558d-4a60-b9d5-de753e0e2420.png",
-    description: "Hair Gel – Kid-friendly strong hold. T-Rex approved."
+    title: "Out-of-This-World Shine",
+    description: "Galactic hold. Stellar style. Launch your hairstyle into orbit.",
+    image: "/images/out_of_this_world_shine.png",
+    color: "bg-purple-100",
+    hoverColor: "hover:bg-purple-200"
   },
   {
-    title: "Galaxy Gel",
-    image: "/images/c7a9288c-3690-4c4a-baca-dfb5c475b7c5.png",
-    description: "Medium Hold – For out-of-this-world style and flexible fun."
-  },
+    title: "Supercharged Confidence",
+    description: "Everyday heroes need legendary hair. Strong hold. Easy washout. Parent-approved.",
+    image: "/images/supercharged_confidence.png",
+    color: "bg-red-100",
+    hoverColor: "hover:bg-red-200"
+  }
 ];
 
 const Home = () => {
@@ -110,20 +118,33 @@ const Home = () => {
           {/* Product Teaser section */}
           <div className="w-full py-16 bg-[#7B68EE]" id="products">
             <div className="container mx-auto px-6">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white font-fredoka text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-12 text-white font-fredoka text-center">
                 Legendary Products Coming Soon
               </h2>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-6xl mx-auto">
                 {products.map((product, index) => (
-                  <div key={index} className="bg-[#8A7CFC] rounded-xl p-5 backdrop-blur-lg">
-                    <div className="bg-white/10 rounded-xl p-4 mb-6 h-[190px] flex items-center justify-center">
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        <h3 className="text-2xl font-bold text-white mb-2 font-fredoka text-center">Coming Soon</h3>
+                  <div 
+                    key={index} 
+                    className={`rounded-xl p-6 transform transition-all duration-300 hover:scale-105 ${product.color} ${product.hoverColor}`}
+                  >
+                    <div className="mb-6 h-[200px] flex items-center justify-center">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={product.image}
+                          alt={product.title}
+                          fill
+                          style={{ objectFit: 'contain' }}
+                          priority={index < 2}
+                        />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold text-ll-yellow mb-2 font-fredoka text-center">{product.title}</h3>
-                    <p className="text-sm text-white text-center px-1">{product.description}</p>
+                    <h3 className="text-2xl font-bold text-ll-purple mb-3 font-fredoka text-center">
+                      {product.title}
+                    </h3>
+                    <p className="text-gray-700 text-center px-2 leading-relaxed">
+                      {product.description}
+                    </p>
                   </div>
                 ))}
               </div>
