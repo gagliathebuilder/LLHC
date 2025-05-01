@@ -105,7 +105,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-center space-y-4"
+                className="text-center space-y-3 mb-10"
               >
                 {/* H1 Headline */}
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ll-purple font-fredoka leading-tight">
@@ -117,14 +117,12 @@ const Home = () => {
                   Clean. Fun. Thoughtfully made—for the boys.
                 </h2>
 
-                {/* Supporting Text */}
-                <p className="text-xl sm:text-2xl text-gray-700 mt-2">
-                  For the boys who dream big, play hard, and rock great hair.
-                </p>
-
-                {/* Feature Line Pill */}
-                <div className="inline-block bg-white/80 backdrop-blur-sm px-6 py-2 rounded-full border border-ll-purple/20 shadow-sm">
-                  <p className="text-base sm:text-lg font-fredoka text-ll-purple">
+                {/* Body Copy and Supporting Text */}
+                <div className="mt-4 space-y-2">
+                  <p className="text-xl sm:text-2xl text-gray-700">
+                    For the dudes who dream big, play hard, and rock great hair.
+                  </p>
+                  <p className="text-base sm:text-lg text-gray-500">
                     Tear-free • Parent-approved • 100% kid-cool
                   </p>
                 </div>
@@ -135,7 +133,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="w-full max-w-2xl mx-auto mt-8"
+                className="w-full max-w-2xl mx-auto"
               >
                 <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
                   <div className="flex flex-col sm:flex-row w-full items-center gap-3">

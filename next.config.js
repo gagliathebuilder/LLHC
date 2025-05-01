@@ -9,8 +9,8 @@ const nextConfig = {
     ],
   },
   experimental: {
-    turbo: true,
-  },
+    turbopack: true
+  }
 }
 
 module.exports = nextConfig 
