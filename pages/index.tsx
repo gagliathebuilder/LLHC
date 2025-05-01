@@ -82,12 +82,13 @@ const Home = () => {
 
         <main className="flex-grow flex flex-col items-center justify-center text-center">
           <div className="w-full px-4 sm:px-6 py-12 sm:py-16 bg-[#FDF8F5]">
-            <div className="max-w-4xl mx-auto mb-12 sm:mb-16">
+            <div className="max-w-4xl mx-auto">
+              {/* Logo */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="mx-auto mb-6 sm:mb-8 relative w-[280px] h-[280px] xs:w-[400px] xs:h-[400px] sm:w-[600px] sm:h-[600px]"
+                className="mx-auto mb-8 relative w-[280px] h-[280px] xs:w-[400px] xs:h-[400px] sm:w-[500px] sm:h-[500px]"
               >
                 <Image 
                   src="/images/logo.png"
@@ -99,42 +100,49 @@ const Home = () => {
                 />
               </motion.div>
               
+              {/* Hero Text Content */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-center"
+                className="text-center space-y-4"
               >
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ll-purple mb-3 sm:mb-4 font-fredoka leading-tight">
+                {/* H1 Headline */}
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ll-purple font-fredoka leading-tight">
                   Legendary Grooming Is Coming Soon
                 </h1>
-                <p className="text-xl sm:text-2xl text-ll-purple-dark mb-6 sm:mb-8 font-semibold">
+
+                {/* H2 Subheadline */}
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-ll-purple-dark font-fredoka">
                   Clean. Fun. Thoughtfully made—for the boys.
+                </h2>
+
+                {/* Supporting Text */}
+                <p className="text-xl sm:text-2xl text-gray-700 mt-2">
+                  For the boys who dream big, play hard, and rock great hair.
                 </p>
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  className="max-w-3xl mx-auto"
-                >
-                  <p className="text-lg sm:text-xl md:text-2xl mb-3 text-gray-700">
-                    For the boys who dream big, play hard, and rock great hair.
+
+                {/* Feature Line Pill */}
+                <div className="inline-block bg-white/80 backdrop-blur-sm px-6 py-2 rounded-full border border-ll-purple/20 shadow-sm">
+                  <p className="text-base sm:text-lg font-fredoka text-ll-purple">
+                    Tear-free • Parent-approved • 100% kid-cool
                   </p>
-                  <p className="text-base sm:text-lg md:text-xl text-gray-600">
-                    Tear-free. Parent-approved. 100% kid-cool.
-                  </p>
-                </motion.div>
+                </div>
               </motion.div>
 
               {/* Email Signup Form */}
-              <div className="w-full max-w-2xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="w-full max-w-2xl mx-auto mt-8"
+              >
                 <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
                   <div className="flex flex-col sm:flex-row w-full items-center gap-3">
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full sm:flex-1 px-4 py-3 rounded-full border border-ll-purple/30 focus:ring-2 focus:ring-ll-purple/40 focus:outline-none min-h-[48px]"
+                      className="w-full sm:flex-1 px-6 py-4 rounded-full border border-ll-purple/30 focus:ring-2 focus:ring-ll-purple/40 focus:outline-none text-lg"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -143,7 +151,7 @@ const Home = () => {
                     <button
                       type="submit"
                       disabled={status === 'loading' || status === 'success'}
-                      className="w-full sm:w-auto bg-ll-purple text-white px-8 py-3 rounded-full font-semibold min-h-[48px] 
+                      className="w-full sm:w-auto bg-ll-purple text-white px-8 py-4 rounded-full font-semibold text-lg
                                hover:transform hover:scale-105 transition-all duration-200 disabled:opacity-50
                                hover:bg-ll-purple-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ll-purple"
                     >
@@ -152,16 +160,16 @@ const Home = () => {
                   </div>
                   
                   {message && (
-                    <div className={`text-center ${status === 'error' ? 'text-red-500' : 'text-green-600'}`}>
+                    <div className={`text-lg ${status === 'error' ? 'text-red-500' : 'text-green-600'}`}>
                       {message}
                     </div>
                   )}
 
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 font-medium">
                     No spam. Just epic updates and launch-day surprises.
                   </p>
                 </form>
-              </div>
+              </motion.div>
             </div>
           </div>
 
