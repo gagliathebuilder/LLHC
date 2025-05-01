@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Head from 'next/head';
+import { motion } from 'framer-motion';
 
 const Home = () => {
   const [email, setEmail] = useState('');
@@ -82,7 +83,12 @@ const Home = () => {
         <main className="flex-grow flex flex-col items-center justify-center text-center">
           <div className="w-full px-4 sm:px-6 py-12 sm:py-16 bg-[#FDF8F5]">
             <div className="max-w-4xl mx-auto mb-12 sm:mb-16">
-              <div className="mx-auto mb-6 sm:mb-8 relative w-[280px] h-[280px] xs:w-[400px] xs:h-[400px] sm:w-[600px] sm:h-[600px]">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="mx-auto mb-6 sm:mb-8 relative w-[280px] h-[280px] xs:w-[400px] xs:h-[400px] sm:w-[600px] sm:h-[600px]"
+              >
                 <Image 
                   src="/images/logo.png"
                   alt="Little Legends Hold Co. Logo" 
@@ -91,13 +97,35 @@ const Home = () => {
                   priority
                   className="p-2 sm:p-4"
                 />
-              </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ll-purple mb-3 sm:mb-4 font-fredoka">
-                Legendary Grooming is Coming Soon
-              </h1>
-              <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-700 px-4 sm:px-0">
-                For boys who dream big, play hard, and rock great hair. Tear-free. Parent-approved. 100% kid-cool.
-              </p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-center"
+              >
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ll-purple mb-3 sm:mb-4 font-fredoka leading-tight">
+                  Legendary Grooming Is Coming Soon
+                </h1>
+                <p className="text-xl sm:text-2xl text-ll-purple-dark mb-6 sm:mb-8 font-semibold">
+                  Clean. Fun. Thoughtfully made—for the boys.
+                </p>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="max-w-3xl mx-auto"
+                >
+                  <p className="text-lg sm:text-xl md:text-2xl mb-3 text-gray-700">
+                    For the boys who dream big, play hard, and rock great hair.
+                  </p>
+                  <p className="text-base sm:text-lg md:text-xl text-gray-600">
+                    Tear-free. Parent-approved. 100% kid-cool.
+                  </p>
+                </motion.div>
+              </motion.div>
 
               {/* Email Signup Form */}
               <div className="w-full max-w-2xl mx-auto">
@@ -140,9 +168,20 @@ const Home = () => {
           {/* Legendary Products Section */}
           <div className="w-full py-12 sm:py-16 bg-white" id="products">
             <div className="container mx-auto px-4 sm:px-6">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-[#2D2D2D] font-fredoka text-center">
-                Legendary Products Coming Soon
-              </h2>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="mb-8 sm:mb-12"
+              >
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2D2D2D] font-fredoka text-center">
+                  Big Style for Little Sidekicks.
+                </h2>
+                <p className="text-base sm:text-lg text-gray-600 mt-4 text-center">
+                  Coming soon — and totally worth the wait.
+                </p>
+              </motion.div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-7xl mx-auto">
                 {products.map((product, index) => (
