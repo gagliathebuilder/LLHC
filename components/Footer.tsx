@@ -15,11 +15,14 @@ const Footer = () => {
           
           <div>
             <h3 className="font-bold text-purple-700 mb-4">Products</h3>
+            <p className="text-sm text-gray-600 mb-2">
+              Epic styles incoming! Our legendary line of hair products is about to make its debut.
+            </p>
             <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="text-gray-600 hover:text-purple-700">Hero Hold</Link></li>
-              <li><Link href="#" className="text-gray-600 hover:text-purple-700">Shark Bait</Link></li>
-              <li><Link href="#" className="text-gray-600 hover:text-purple-700">Dino Glue</Link></li>
-              <li><Link href="#" className="text-gray-600 hover:text-purple-700">Galaxy Gel</Link></li>
+              <li className="text-gray-500 italic">Maximum Hold Formula ✨</li>
+              <li className="text-gray-500 italic">Ocean-Inspired Style 🌊</li>
+              <li className="text-gray-500 italic">Prehistoric Power 🦖</li>
+              <li className="text-gray-500 italic">Out-of-this-World Control 🚀</li>
             </ul>
           </div>
           
