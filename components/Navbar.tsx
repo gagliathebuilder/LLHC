@@ -7,12 +7,12 @@ const Navbar = () => {
     <header className="w-full py-4 px-6 bg-white shadow-sm">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <Link href="/" className="flex items-center">
-          <div className="relative w-[50px] h-[50px]">
+          <div className="relative w-[75px] h-[75px] -ml-3">
             <Image
               src="/images/face.png"
               alt="Little Legends Hold Co."
-              width={50}
-              height={50}
+              width={75}
+              height={75}
               style={{ objectFit: 'contain' }}
             />
           </div>
