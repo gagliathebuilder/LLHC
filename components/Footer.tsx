@@ -58,6 +58,9 @@ const Footer = () => {
         
         <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-gray-600">
           <p>© {new Date().getFullYear()} Little Legends Hold Co. All rights reserved.</p>
+          <p className="mt-2 text-gray-500 text-xs">
+            Created with ♥️ in Costa Mesa, CA <span className="opacity-75">🐻</span>
+          </p>
         </div>
       </div>
     </footer>
