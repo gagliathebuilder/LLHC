@@ -16,7 +16,7 @@ const Navbar = () => {
               style={{ objectFit: 'contain' }}
             />
           </div>
-          <span className="ml-2 font-bold text-ll-purple text-xl">Little Legends Hold Co.</span>
+          <span className="ml-2 font-bold text-ll-purple text-xl">Little Legends</span>
         </Link>
         
         <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
