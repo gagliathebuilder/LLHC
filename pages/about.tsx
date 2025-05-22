@@ -41,7 +41,7 @@ const About = () => {
                   className="relative w-40 h-40 sm:w-56 sm:h-56 mx-auto mb-12"
                 >
                   <Image
-                    src="/images/logo.png"
+                    src="/images/cleanlogo.png"
                     alt="Little Legends Logo"
                     fill
                     style={{ objectFit: 'contain' }}

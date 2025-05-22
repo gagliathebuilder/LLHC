@@ -91,7 +91,7 @@ const Home = () => {
                 className="mx-auto mb-8 relative w-[420px] h-[420px] xs:w-[600px] xs:h-[600px] sm:w-[750px] sm:h-[750px]"
               >
                 <Image 
-                  src="/images/logo.png"
+                  src="/images/cleanlogo.png"
                   alt="Little Legends Hold Co. Logo" 
                   fill
                   style={{ objectFit: 'contain', transform: 'translateX(-5%)' }}
@@ -114,7 +114,7 @@ const Home = () => {
 
                 {/* H2 Subheadline */}
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-ll-purple-dark font-fredoka">
-                  Clean. Fun. Thoughtfully made—for the boys.
+                  Clean. Fun. Thoughtfully crafted—for the boys.
                 </h2>
 
                 {/* Body Copy and Supporting Text */}
