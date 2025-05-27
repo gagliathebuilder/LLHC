@@ -9,10 +9,19 @@ export default function Document() {
         <link rel="icon" type="image/png" href="/images/face.png" sizes="64x64" />
         <link rel="icon" type="image/png" href="/images/face.png" sizes="180x180" />
         <link rel="icon" type="image/png" href="/images/face.png" />
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZJLY1EXTG"></script>
       </Head>
       <body className="antialiased">
         <Main />
         <NextScript />
+        {/* Google Analytics Inline Config */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-YZJLY1EXTG');
+        `}} />
       </body>
     </Html>
   );
