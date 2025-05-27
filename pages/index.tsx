@@ -241,13 +241,71 @@ const Home = () => {
               </div>
             </section>
 
-            <div className="mt-12 sm:mt-16 bg-ll-purple/5 p-6 sm:p-8 rounded-xl max-w-3xl mx-auto text-center" id="about">
-              <h3 className="text-xl font-bold text-ll-purple mb-2">Dad Built. Kid Tested.</h3>
-              <p className="text-gray-700 text-sm sm:text-base">
-                At Little Legends, we get it. Getting kids out the door with great hair shouldn't be a struggle.
-                We're dads who've been there—and kids who know what works. Our mission: epic style, safe ingredients,
-                and hair products boys actually want to use.
-              </p>
+            <div className="relative mt-12 sm:mt-16">
+              {/* Subtle divider */}
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-ll-purple/10 to-transparent"></div>
+              
+              <div className="bg-gradient-to-br from-ll-purple/5 to-ll-purple/10 p-8 sm:p-12 rounded-2xl max-w-4xl mx-auto text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]" id="about">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="space-y-6"
+                >
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-6">
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      className="text-ll-purple font-extrabold text-xl sm:text-2xl tracking-tight"
+                    >
+                      Dad Built
+                    </motion.div>
+                    <span className="hidden sm:block text-ll-purple/30">•</span>
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      className="text-ll-purple font-extrabold text-xl sm:text-2xl tracking-tight"
+                    >
+                      Kid Tested
+                    </motion.div>
+                    <span className="hidden sm:block text-ll-purple/30">•</span>
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      className="text-ll-purple font-extrabold text-xl sm:text-2xl tracking-tight"
+                    >
+                      Mom Approved
+                    </motion.div>
+                  </div>
+
+                  <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-sm">
+                    <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
+                      At Little Legends, we get it. Getting kids out the door with great hair shouldn't be a struggle.
+                      We're dads who've been there—and kids who know what works. Our mission: epic style, safe ingredients,
+                      and hair products boys actually want to use.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap justify-center gap-4 mt-6">
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      className="bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm"
+                    >
+                      <span className="text-sm font-medium text-gray-700">Safe & Natural</span>
+                    </motion.div>
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      className="bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm"
+                    >
+                      <span className="text-sm font-medium text-gray-700">Tear-Free Formula</span>
+                    </motion.div>
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      className="bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm"
+                    >
+                      <span className="text-sm font-medium text-gray-700">Easy Washout</span>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </div>
         </main>
