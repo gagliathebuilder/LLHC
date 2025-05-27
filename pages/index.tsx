@@ -189,12 +189,15 @@ const Home = () => {
                 </p>
               </motion.div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto px-4 sm:px-6">
                 {products.map((product, index) => (
-                  <div 
+                  <motion.div 
                     key={index} 
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300 }}
                     className="bg-white rounded-2xl p-4 sm:p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] text-center 
-                             transform transition-transform duration-300 hover:-translate-y-1"
+                             transform transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)]
+                             border border-transparent hover:border-ll-purple/20"
                   >
                     <div className="mb-4 sm:mb-6 h-[80px] sm:h-[100px] flex items-center justify-center">
                       <div className="relative w-[80px] sm:w-[100px] h-[80px] sm:h-[100px]">
@@ -202,18 +205,17 @@ const Home = () => {
                           src={product.image}
                           alt={product.alt}
                           fill
-                          style={{ objectFit: 'contain' }}
-                          priority={index < 2}
+                          className="object-contain transition-transform duration-300 group-hover:scale-110"
                         />
                       </div>
                     </div>
-                    <h3 className="text-lg sm:text-xl font-extrabold text-[#1a1a1a] mb-2 font-fredoka tracking-tight">
+                    <h3 className="text-lg sm:text-xl font-bold text-ll-purple mb-2 sm:mb-3 font-fredoka">
                       {product.title}
                     </h3>
-                    <p className="text-[0.9rem] sm:text-[0.95rem] text-[#555] leading-relaxed">
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                       {product.description}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
