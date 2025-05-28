@@ -4,14 +4,26 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
+import Script from 'next/script';
 
 const Home = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  const validateEmail = (email: string) => {
+    // Simple email regex for validation
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setEmailError('');
+    if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address.');
+      return;
+    }
     setStatus('loading');
 
     try {
@@ -72,10 +84,36 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Coming Soon | Little Legends Hold Co.</title>
+        <title>Coming Soon | Little Legends</title>
         <meta name="description" content="For boys who dream big, play hard, and rock great hair. Tear-free. Parent-approved. 100% kid-cool." />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="Coming Soon | Little Legends" />
+        <meta property="og:description" content="For boys who dream big, play hard, and rock great hair. Tear-free. Parent-approved. 100% kid-cool." />
+        <meta property="og:image" content="/images/cleanlogo.png" />
+        <meta property="og:image:alt" content="Little Legends Dino Logo" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://littlelegendshair.com" />
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Coming Soon | Little Legends" />
+        <meta name="twitter:description" content="For boys who dream big, play hard, and rock great hair. Tear-free. Parent-approved. 100% kid-cool." />
+        <meta name="twitter:image" content="/images/cleanlogo.png" />
+        <meta name="twitter:image:alt" content="Little Legends Dino Logo" />
       </Head>
+      {/* Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-YZJLY1EXTG"
+        strategy="afterInteractive"
+      />
+      <Script id="ga-gtag-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-YZJLY1EXTG');
+        `}
+      </Script>
       
       <div className="flex flex-col min-h-screen bg-[#FDF8F5] text-gray-900">
         <Navbar />
@@ -140,20 +178,28 @@ const Home = () => {
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full sm:flex-1 px-5 py-3 rounded-full border border-ll-purple/30 focus:ring-2 focus:ring-ll-purple/40 focus:outline-none text-base"
+                      className={`w-full sm:flex-1 px-5 py-3 rounded-full border border-ll-purple/30 focus:ring-2 focus:ring-ll-purple/40 focus:outline-none text-base ${emailError ? 'border-red-400' : ''}`}
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (e.target.value === '' || validateEmail(e.target.value)) {
+                          setEmailError('');
+                        } else {
+                          setEmailError('Please enter a valid email address.');
+                        }
+                      }}
                       required
                       disabled={status === 'loading' || status === 'success'}
+                      aria-invalid={!!emailError}
+                      aria-describedby="email-error"
                     />
                     <button
                       type="submit"
-                      disabled={status === 'loading' || status === 'success'}
-                      className="w-full sm:w-auto bg-ll-purple text-white px-6 py-3 rounded-full font-semibold text-base
-                               hover:transform hover:scale-105 transition-all duration-200 disabled:opacity-50
-                               hover:bg-ll-purple-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ll-purple"
+                      disabled={status === 'loading' || status === 'success' || !validateEmail(email)}
+                      className="w-14 h-14 flex items-center justify-center bg-ll-purple text-white text-3xl rounded-full shadow-md hover:bg-ll-purple-dark transition-all duration-200 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ll-purple border-4 border-white"
+                      aria-label="Submit email"
                     >
-                      {status === 'loading' ? 'Joining...' : 'Join the Club'}
+                      <span className="leading-none">🦖</span>
                     </button>
                   </div>
                   
@@ -161,6 +207,10 @@ const Home = () => {
                     <div className={`text-lg ${status === 'error' ? 'text-red-500' : 'text-green-600'}`}>
                       {message}
                     </div>
+                  )}
+
+                  {emailError && (
+                    <div id="email-error" className="text-red-500 text-sm font-semibold mt-1">Please enter a valid email address.</div>
                   )}
 
                   <p className="text-sm text-gray-500 font-medium">

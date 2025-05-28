@@ -5,21 +5,21 @@ const Footer = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const [emailError, setEmailError] = useState('');
 
   const isValidEmail = (email: string) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    setEmailError('');
     if (!isValidEmail(email)) {
+      setEmailError('Please enter a valid email address.');
       setStatus('error');
-      setMessage('Please enter a valid email address');
+      setMessage('');
       return;
     }
-
     setStatus('loading');
 
     try {
@@ -89,28 +89,39 @@ const Footer = () => {
               Join our mailing list for updates and offers.
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-              <div className="flex">
+              <div className="flex w-full items-center gap-2">
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="w-full px-3 py-2 text-sm border border-ll-purple/30 rounded-l-full focus:ring-2 focus:ring-ll-purple/40 focus:outline-none"
+                  className={`w-full px-3 py-2 text-sm border border-ll-purple/30 rounded-full focus:ring-2 focus:ring-ll-purple/40 focus:outline-none ${emailError ? 'border-red-400' : ''}`}
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (e.target.value === '' || isValidEmail(e.target.value)) {
+                      setEmailError('');
+                    } else {
+                      setEmailError('Please enter a valid email address.');
+                    }
+                  }}
                   required
                   disabled={status === 'loading' || status === 'success'}
+                  aria-invalid={!!emailError}
+                  aria-describedby="footer-email-error"
                 />
                 <button
                   type="submit"
-                  disabled={status === 'loading' || status === 'success'}
-                  className="bg-ll-purple text-white px-3 py-2 rounded-r-full text-sm hover:bg-ll-purple-dark transition disabled:opacity-50"
+                  disabled={status === 'loading' || status === 'success' || !isValidEmail(email)}
+                  className="w-12 h-12 flex items-center justify-center bg-ll-purple text-white text-2xl rounded-full shadow-md hover:bg-ll-purple-dark transition-all duration-200 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ll-purple border-4 border-white"
+                  aria-label="Submit email"
                 >
-                  {status === 'loading' ? '...' : 'Join'}
+                  <span className="leading-none">🦖</span>
                 </button>
               </div>
-              {message && (
-                <p className={`text-xs ${status === 'error' ? 'text-red-500' : 'text-green-600'}`}>
-                  {message}
-                </p>
+              {emailError && (
+                <div id="footer-email-error" className="text-red-500 text-xs font-semibold mt-1">{emailError}</div>
+              )}
+              {message && !emailError && (
+                <p className={`text-xs ${status === 'error' ? 'text-red-500' : 'text-green-600'}`}>{message}</p>
               )}
             </form>
             <div className="mt-4 flex gap-6">

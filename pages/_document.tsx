@@ -13,6 +13,11 @@ export default function Document() {
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZJLY1EXTG"></script>
       </Head>
       <body className="antialiased">
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W369X7WM"
+                  height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe>
+        </noscript>
         <Main />
         <NextScript />
         {/* Google Analytics Inline Config */}
