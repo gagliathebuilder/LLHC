@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -111,10 +112,10 @@ const Footer = () => {
                 <button
                   type="submit"
                   disabled={status === 'loading' || status === 'success' || !isValidEmail(email)}
-                  className="w-12 h-12 flex items-center justify-center bg-ll-purple text-white text-2xl rounded-full shadow-md hover:bg-ll-purple-dark transition-all duration-200 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ll-purple border-4 border-white"
+                  className="w-14 h-14 flex items-center justify-center bg-white border-2 border-purple-600 rounded-full shadow-md hover:bg-purple-50 transition-transform transform hover:scale-110 ml-2"
                   aria-label="Submit email"
                 >
-                  <span className="leading-none">🦖</span>
+                  <Image src="/images/submitbutton.png" alt="Submit" width={32} height={32} className="w-8 h-8 brightness-125 contrast-125 filter drop-shadow-md" />
                 </button>
               </div>
               {emailError && (
