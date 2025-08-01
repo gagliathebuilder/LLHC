@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import VideoSection from './VideoSection'
 
 interface Product {
   id: string
@@ -11,6 +12,7 @@ interface Product {
   image: string
   color: string
   features: string[]
+  videoUrl?: string
 }
 
 const products: Product[] = [
@@ -21,7 +23,8 @@ const products: Product[] = [
     description: 'Tear-free wash. Beach-ready smiles. Built for little legends who conquer the tides.',
     image: '/images/shark-bait.png',
     color: '#3B82F6',
-    features: ['Tear-free formula', 'Ocean-inspired scent', 'Gentle cleansing']
+    features: ['Tear-free formula', 'Ocean-inspired scent', 'Gentle cleansing'],
+    videoUrl: '/videos/Shark Bait Intro.mp4'
   },
   {
     id: 'dino-glue',
@@ -30,7 +33,8 @@ const products: Product[] = [
     description: 'Roar-worthy hold. Wild-day tested. Adventure-ready hair for your little explorer.',
     image: '/images/dino-glue.png',
     color: '#10B981',
-    features: ['Strong hold', 'Easy washout', 'Adventure-proof']
+    features: ['Strong hold', 'Easy washout', 'Adventure-proof'],
+    videoUrl: '/videos/Dino Intro.mp4'
   },
   {
     id: 'galaxy-gel',
@@ -39,7 +43,8 @@ const products: Product[] = [
     description: 'Galactic hold. Stellar style. Launch your hairstyle into orbit.',
     image: '/images/galaxy-gel.png',
     color: '#8B5CF6',
-    features: ['Galactic shine', 'Long-lasting', 'Space-age formula']
+    features: ['Galactic shine', 'Long-lasting', 'Space-age formula'],
+    videoUrl: '/videos/Galaxy Intro.mp4'
   },
   {
     id: 'hero-hold',
@@ -48,7 +53,8 @@ const products: Product[] = [
     description: 'Transform into a confident champion with our cape-inspired style that makes every day feel like a superhero adventure.',
     image: '/images/hero-hold.png',
     color: '#EF4444',
-    features: ['Superhero strength', 'Cape-worthy style', 'Confidence boost']
+    features: ['Superhero strength', 'Cape-worthy style', 'Confidence boost'],
+    videoUrl: '/videos/Hero Intro.mp4'
   }
 ]
 
@@ -135,29 +141,64 @@ const ProductCard: React.FC<{ product: Product; index: number }> = ({ product, i
 
 export default function ProductGrid() {
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-fredoka">
-            Big Style for our Little Sidekicks
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Coming soon — and totally worth the wait. Each product is crafted with care for the little legends in your life.
-          </p>
-        </motion.div>
+    <>
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-fredoka">
+              Big Style for our Little Sidekicks
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Coming soon — and totally worth the wait. Each product is crafted with care for the little legends in your life.
+            </p>
+          </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {products.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} />
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {products.map((product, index) => (
+              <ProductCard key={product.id} product={product} index={index} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Video Showcase Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-fredoka">
+              See the Magic in Action
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Watch how our products transform everyday hair into legendary styles
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {products.slice(0, 4).map((product, index) => (
+              <VideoSection
+                key={product.id}
+                videoUrl={product.videoUrl || ''}
+                title={`${product.name} in Action`}
+                description={product.description}
+                posterImage={product.image}
+                className="w-full"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   )
 } 

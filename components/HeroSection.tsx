@@ -18,7 +18,7 @@ export default function HeroSection() {
           className="absolute inset-0 w-full h-full object-cover"
           onError={() => setVideoError(true)}
         >
-          <source src="/videos/little-legends-intro.mp4" type="video/mp4" />
+          <source src="/videos/Dino Intro.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       ) : (
