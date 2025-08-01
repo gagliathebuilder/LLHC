@@ -325,39 +325,39 @@ const Home = () => {
                 className="mb-8 sm:mb-12 text-center"
               >
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2D2D2D] font-fredoka">
-                  See the Magic in Action
+                  Meet Our Legendary Lineup
                 </h2>
                 <p className="text-base sm:text-lg text-gray-600 mt-4">
-                  Watch how our products transform everyday hair into legendary styles
+                  Get a sneak peek at the products that will transform your little legend's style
                 </p>
               </motion.div>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
                 <VideoSection
                   videoUrl="/videos/Dino Intro.mp4"
-                  title="Dino Glue in Action"
-                  description="Watch how our tear-free formula creates epic styles that last all day"
+                  title="Dino Glue Teaser"
+                  description="Coming soon: Roar-worthy hold for your little explorer"
                   posterImage="/images/dino-glue.png"
                   className="w-full"
                 />
                 <VideoSection
                   videoUrl="/videos/Shark Bait Intro.mp4"
-                  title="Shark Bait Shampoo"
-                  description="See the gentle yet effective cleaning power of our ocean-inspired formula"
+                  title="Shark Bait Teaser"
+                  description="Coming soon: Ocean adventures await with tear-free washing"
                   posterImage="/images/shark-bait.png"
                   className="w-full"
                 />
                 <VideoSection
                   videoUrl="/videos/Galaxy Intro.mp4"
-                  title="Galaxy Gel in Action"
-                  description="Experience out-of-this-world shine and stellar styling"
+                  title="Galaxy Gel Teaser"
+                  description="Coming soon: Out-of-this-world shine and stellar style"
                   posterImage="/images/galaxy-gel.png"
                   className="w-full"
                 />
                 <VideoSection
                   videoUrl="/videos/Hero Intro.mp4"
-                  title="Hero Hold in Action"
-                  description="Transform into a confident champion with superhero styling power"
+                  title="Hero Hold Teaser"
+                  description="Coming soon: Supercharged confidence for your little champion"
                   posterImage="/images/hero-hold.png"
                   className="w-full"
                 />

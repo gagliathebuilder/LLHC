@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ReactPlayer from 'react-player';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 
 interface VideoSectionProps {
@@ -21,14 +20,29 @@ const VideoSection: React.FC<VideoSectionProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [showControls, setShowControls] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);
+    const video = document.getElementById(`video-${title}`) as HTMLVideoElement;
+    if (video) {
+      if (isPlaying) {
+        video.pause();
+      } else {
+        video.play();
+      }
+    }
   };
 
   const handleMuteToggle = () => {
-    setIsMuted(!isMuted);
+    const video = document.getElementById(`video-${title}`) as HTMLVideoElement;
+    if (video) {
+      video.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
   };
+
+  const handleVideoPlay = () => setIsPlaying(true);
+  const handleVideoPause = () => setIsPlaying(false);
 
   return (
     <motion.div
@@ -43,18 +57,35 @@ const VideoSection: React.FC<VideoSectionProps> = ({
       <div className="relative rounded-2xl overflow-hidden shadow-lg bg-black">
         {/* Video Player */}
         <div className="relative aspect-video">
-          <ReactPlayer
-            url={videoUrl}
-            playing={isPlaying}
-            muted={isMuted}
-            loop
-            width="100%"
-            height="100%"
-            style={{ objectFit: 'cover' }}
-            light={posterImage}
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
-          />
+          {!videoError ? (
+            <video
+              id={`video-${title}`}
+              src={videoUrl}
+              poster={posterImage}
+              muted={isMuted}
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+              onPlay={handleVideoPlay}
+              onPause={handleVideoPause}
+              onError={() => setVideoError(true)}
+            />
+          ) : (
+            <div 
+              className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center"
+              style={{
+                backgroundImage: posterImage ? `url(${posterImage})` : 'none',
+                backgroundSize: 'contain',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            >
+              <div className="text-white text-center">
+                <div className="text-4xl mb-2">🎬</div>
+                <p className="text-sm">Video preview</p>
+              </div>
+            </div>
+          )}
           
           {/* Overlay Controls */}
           <AnimatePresence>
