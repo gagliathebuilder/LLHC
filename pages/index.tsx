@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Script from 'next/script';
+import AnimatedProductCard from '@/components/AnimatedProductCard';
+import VideoSection from '@/components/VideoSection';
 
 const Home = () => {
   const [email, setEmail] = useState('');
@@ -241,32 +243,56 @@ const Home = () => {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto px-4 sm:px-6">
                 {products.map((product, index) => (
-                  <motion.div 
-                    key={index} 
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="bg-white rounded-2xl p-4 sm:p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] text-center 
-                             transform transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)]
-                             border border-transparent hover:border-ll-purple/20"
-                  >
-                    <div className="mb-4 sm:mb-6 h-[80px] sm:h-[100px] flex items-center justify-center">
-                      <div className="relative w-[80px] sm:w-[100px] h-[80px] sm:h-[100px]">
-                        <Image
-                          src={product.image}
-                          alt={product.alt}
-                          fill
-                          className="object-contain transition-transform duration-300 group-hover:scale-110"
-                        />
-                      </div>
-                    </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-ll-purple mb-2 sm:mb-3 font-fredoka">
-                      {product.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                      {product.description}
-                    </p>
-                  </motion.div>
+                  <AnimatedProductCard
+                    key={index}
+                    title={product.title}
+                    description={product.description}
+                    image={product.image}
+                    alt={product.alt}
+                    index={index}
+                    onClick={() => {
+                      // Add product interaction logic here
+                      console.log(`Clicked on ${product.title}`);
+                    }}
+                  />
                 ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Video Showcase Section */}
+          <div className="w-full py-12 sm:py-16 bg-white">
+            <div className="container mx-auto px-4 sm:px-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="mb-8 sm:mb-12 text-center"
+              >
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2D2D2D] font-fredoka">
+                  See the Magic in Action
+                </h2>
+                <p className="text-base sm:text-lg text-gray-600 mt-4">
+                  Watch how our products transform everyday hair into legendary styles
+                </p>
+              </motion.div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <VideoSection
+                  videoUrl="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4"
+                  title="Dino Glue in Action"
+                  description="Watch how our tear-free formula creates epic styles that last all day"
+                  posterImage="/images/dino-glue.png"
+                  className="w-full"
+                />
+                <VideoSection
+                  videoUrl="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4"
+                  title="Shark Bait Shampoo"
+                  description="See the gentle yet effective cleaning power of our ocean-inspired formula"
+                  posterImage="/images/shark-bait.png"
+                  className="w-full"
+                />
               </div>
             </div>
           </div>
