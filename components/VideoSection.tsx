@@ -8,6 +8,7 @@ interface VideoSectionProps {
   description: string;
   posterImage?: string;
   className?: string;
+  posterBackground?: string;
 }
 
 const VideoSection: React.FC<VideoSectionProps> = ({
@@ -15,7 +16,8 @@ const VideoSection: React.FC<VideoSectionProps> = ({
   title,
   description,
   posterImage,
-  className = ''
+  className = '',
+  posterBackground
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -161,12 +163,13 @@ const VideoSection: React.FC<VideoSectionProps> = ({
             />
           ) : (
             <div 
-              className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center"
+              className="w-full h-full flex items-center justify-center"
               style={{
                 backgroundImage: posterImage ? `url(${posterImage})` : 'none',
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat'
+                backgroundRepeat: 'no-repeat',
+                backgroundColor: posterBackground || 'transparent'
               }}
             >
               <div className="text-white text-center">
