@@ -7,13 +7,14 @@ import { motion } from 'framer-motion';
 import Script from 'next/script';
 import AnimatedProductCard from '@/components/AnimatedProductCard';
 import VideoSection from '@/components/VideoSection';
+import SneakPeekModal from '@/components/SneakPeekModal';
 
 const Home = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [showVideoHero, setShowVideoHero] = useState(false);
+  const [isSneakPeekOpen, setIsSneakPeekOpen] = useState(false);
 
   const validateEmail = (email: string) => {
     // Simple email regex for validation
@@ -119,62 +120,10 @@ const Home = () => {
       </Script>
       
       <div className="flex flex-col min-h-screen bg-[#FDF8F5] text-gray-900">
-        <Navbar 
-          showVideoHero={showVideoHero}
-          onToggleVideo={() => setShowVideoHero(!showVideoHero)}
-        />
+        <Navbar onSneakPeekClick={() => setIsSneakPeekOpen(true)} />
 
         <main className="flex-grow flex flex-col items-center justify-center text-center">
-          {showVideoHero ? (
-            <div className="relative w-full h-screen overflow-hidden flex items-center justify-center text-white">
-              {/* Video Background */}
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-              >
-                <source src="/videos/Dino Intro.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black bg-opacity-40 z-10" />
-              
-              {/* Content */}
-              <div className="relative z-20 text-center px-6">
-                <motion.h1 
-                  className="text-4xl md:text-6xl font-extrabold tracking-wide mb-4 font-fredoka"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  LITTLE LEGENDS
-                </motion.h1>
-                <motion.p 
-                  className="text-xl md:text-2xl mb-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                >
-                  Built for play. Powered by confidence.
-                </motion.p>
-                <motion.a
-                  href="#email-signup"
-                  className="inline-block px-6 py-3 bg-yellow-400 text-black font-bold rounded-xl hover:bg-yellow-500 transition-all hover:scale-105"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Join the Waitlist
-                </motion.a>
-              </div>
-            </div>
-          ) : (
-            <div className="w-full px-4 sm:px-6 py-12 sm:py-16 bg-[#FDF8F5]">
+          <div className="w-full px-4 sm:px-6 py-12 sm:py-16 bg-[#FDF8F5]">
             <div className="max-w-4xl mx-auto">
               {/* Logo */}
               <motion.div 
@@ -275,7 +224,6 @@ const Home = () => {
               </motion.div>
             </div>
           </div>
-          )}
 
           {/* Legendary Products Section */}
           <div className="w-full py-12 sm:py-16 bg-white" id="products">
@@ -456,6 +404,12 @@ const Home = () => {
 
         <Footer />
       </div>
+
+      {/* Sneak Peek Modal */}
+      <SneakPeekModal 
+        isOpen={isSneakPeekOpen}
+        onClose={() => setIsSneakPeekOpen(false)}
+      />
     </>
   );
 };
