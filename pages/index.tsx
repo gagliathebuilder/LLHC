@@ -337,8 +337,7 @@ const Home = () => {
                   videoUrl="/videos/Dino Intro.mp4"
                   title="Dino Glue Teaser"
                   description="Coming soon: Roar-worthy hold for your little explorer"
-                  posterImage="/images/face.png"
-                  posterBackground="#059669"
+                  posterImage="/images/Purple Skull.png"
                   className="w-full"
                 />
                 <VideoSection
