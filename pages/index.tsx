@@ -344,7 +344,7 @@ const Home = () => {
                   videoUrl="/videos/Shark Bait Intro.mp4"
                   title="Shark Bait Teaser"
                   description="Coming soon: Ocean adventures await with tear-free washing"
-                  posterImage="/images/Purple Skull.png"
+                  posterImage="/images/Blue Skull.png"
                   className="w-full"
                 />
                 <VideoSection
