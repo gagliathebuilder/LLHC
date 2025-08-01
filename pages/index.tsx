@@ -338,7 +338,7 @@ const Home = () => {
                   title="Dino Glue Teaser"
                   description="Coming soon: Roar-worthy hold for your little explorer"
                   posterImage="/images/face.png"
-                  posterBackground="#10B981"
+                  posterBackground="#059669"
                   className="w-full"
                 />
                 <VideoSection

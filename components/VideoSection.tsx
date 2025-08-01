@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX, X } from 'lucide-react';
+import FaceWithBackground from './FaceWithBackground';
 
 interface VideoSectionProps {
   videoUrl: string;
@@ -165,17 +166,26 @@ const VideoSection: React.FC<VideoSectionProps> = ({
             <div 
               className="w-full h-full flex items-center justify-center"
               style={{
-                backgroundImage: posterImage ? `url(${posterImage})` : 'none',
-                backgroundSize: 'contain',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
                 backgroundColor: posterBackground || 'transparent'
               }}
             >
-              <div className="text-white text-center">
-                <div className="text-4xl mb-2">🎬</div>
-                <p className="text-sm">Video preview</p>
-              </div>
+              {posterImage && posterImage.includes('face.png') ? (
+                <FaceWithBackground />
+              ) : posterImage ? (
+                <img
+                  src={posterImage}
+                  alt={title}
+                  className="w-full h-full object-contain"
+                  style={{
+                    backgroundColor: posterBackground || 'transparent'
+                  }}
+                />
+              ) : (
+                <div className="text-white text-center">
+                  <div className="text-4xl mb-2">🎬</div>
+                  <p className="text-sm">Video preview</p>
+                </div>
+              )}
             </div>
           )}
           
