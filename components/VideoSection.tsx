@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, X } from 'lucide-react';
 
 interface VideoSectionProps {
   videoUrl: string;
@@ -21,6 +21,7 @@ const VideoSection: React.FC<VideoSectionProps> = ({
   const [isMuted, setIsMuted] = useState(true);
   const [showControls, setShowControls] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handlePlayPause = () => {
     const video = document.getElementById(`video-${title}`) as HTMLVideoElement;
@@ -29,6 +30,8 @@ const VideoSection: React.FC<VideoSectionProps> = ({
         video.pause();
       } else {
         video.play();
+        // Enter fullscreen mode when video starts playing
+        setIsFullscreen(true);
       }
     }
   };
@@ -41,8 +44,94 @@ const VideoSection: React.FC<VideoSectionProps> = ({
     }
   };
 
-  const handleVideoPlay = () => setIsPlaying(true);
+  const handleVideoPlay = () => {
+    setIsPlaying(true);
+    setIsFullscreen(true);
+  };
+  
   const handleVideoPause = () => setIsPlaying(false);
+
+  const handleCloseFullscreen = () => {
+    const video = document.getElementById(`video-${title}`) as HTMLVideoElement;
+    if (video) {
+      video.pause();
+    }
+    setIsPlaying(false);
+    setIsFullscreen(false);
+  };
+
+  // Fullscreen overlay
+  if (isFullscreen) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black z-50 flex items-center justify-center"
+      >
+        <div className="relative w-full h-full max-w-6xl max-h-[80vh] flex items-center justify-center">
+          {/* Close button */}
+          <button
+            onClick={handleCloseFullscreen}
+            className="absolute top-4 right-4 z-10 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          
+          {/* Video */}
+          {!videoError ? (
+            <video
+              id={`video-${title}-fullscreen`}
+              src={videoUrl}
+              poster={posterImage}
+              muted={isMuted}
+              loop
+              playsInline
+              className="w-full h-full object-contain"
+              onPlay={handleVideoPlay}
+              onPause={handleVideoPause}
+              onError={() => setVideoError(true)}
+              autoPlay
+            />
+          ) : (
+            <div className="text-white text-center">
+              <div className="text-4xl mb-2">🎬</div>
+              <p className="text-sm">Video preview</p>
+            </div>
+          )}
+          
+          {/* Fullscreen controls */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-4">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handlePlayPause}
+              className="bg-white/20 backdrop-blur-sm p-3 rounded-full shadow-lg"
+            >
+              {isPlaying ? (
+                <Pause className="w-6 h-6 text-white" />
+              ) : (
+                <Play className="w-6 h-6 text-white ml-1" />
+              )}
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleMuteToggle}
+              className="bg-white/20 backdrop-blur-sm p-3 rounded-full shadow-lg"
+            >
+              {isMuted ? (
+                <VolumeX className="w-6 h-6 text-white" />
+              ) : (
+                <Volume2 className="w-6 h-6 text-white" />
+              )}
+            </motion.button>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -128,13 +217,13 @@ const VideoSection: React.FC<VideoSectionProps> = ({
           </AnimatePresence>
         </div>
         
-        {/* Content Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+        {/* Enhanced Content Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6">
           <motion.h3
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-white text-xl font-bold font-fredoka mb-2"
+            className="text-white text-2xl font-bold font-fredoka mb-2 drop-shadow-lg"
           >
             {title}
           </motion.h3>
@@ -142,7 +231,7 @@ const VideoSection: React.FC<VideoSectionProps> = ({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-white/90 text-sm"
+            className="text-white/95 text-base font-medium drop-shadow-lg"
           >
             {description}
           </motion.p>
