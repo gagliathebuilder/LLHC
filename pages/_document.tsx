@@ -9,6 +9,10 @@ export default function Document() {
         <link rel="icon" type="image/png" href="/images/face.png" sizes="64x64" />
         <link rel="icon" type="image/png" href="/images/face.png" sizes="180x180" />
         <link rel="icon" type="image/png" href="/images/face.png" />
+        <title>Little Legends Hair | Legendary Grooming for Boys</title>
+        <meta name="description" content="Clean, fun grooming products made just for boys ages 2–12. From Dino Glue to Shark Bait Shampoo, Little Legends brings style, confidence, and adventure to every head of hair. Parent-approved, kid-cool." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://littlelegendshair.com/" />
         {/* Google Analytics */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZJLY1EXTG"></script>
       </Head>
