@@ -337,28 +337,28 @@ const Home = () => {
                   videoUrl="/videos/Dino Intro.mp4"
                   title="Dino Glue Teaser"
                   description="Coming soon: Roar-worthy hold for your little explorer"
-                  posterImage="/images/dino-glue.png"
+                  posterImage="/images/Green Skull.png"
                   className="w-full"
                 />
                 <VideoSection
                   videoUrl="/videos/Shark Bait Intro.mp4"
                   title="Shark Bait Teaser"
                   description="Coming soon: Ocean adventures await with tear-free washing"
-                  posterImage="/images/shark-bait.png"
+                  posterImage="/images/Blue Skull.png"
                   className="w-full"
                 />
                 <VideoSection
                   videoUrl="/videos/Galaxy Intro.mp4"
                   title="Galaxy Gel Teaser"
                   description="Coming soon: Out-of-this-world shine and stellar style"
-                  posterImage="/images/galaxy-gel.png"
+                  posterImage="/images/Black Skull.png"
                   className="w-full"
                 />
                 <VideoSection
                   videoUrl="/videos/Hero Intro.mp4"
                   title="Hero Hold Teaser"
                   description="Coming soon: Supercharged confidence for your little champion"
-                  posterImage="/images/hero-hold.png"
+                  posterImage="/images/Red Skull.png"
                   className="w-full"
                 />
               </div>
