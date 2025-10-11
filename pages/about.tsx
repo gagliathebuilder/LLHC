@@ -138,16 +138,16 @@ const About = () => {
                   className="space-y-8"
                 >
                   <p className="text-xl sm:text-2xl text-gray-800 leading-relaxed">
-                    Kellie is the founder of Little Legends™, a woman-owned, family-run grooming brand created just for boys. As a mom of three, with two beautiful daughters and one wild (but sweet) little boy, she saw a clear gap in the market for clean, fun grooming products made specifically for boys.
+                    I founded Little Legends™, a woman-owned, family-run grooming brand created just for boys. As a mom of three—with two beautiful daughters and one wild (but sweet) little boy—I saw a clear gap in the market for clean, fun grooming products made specifically for boys.
                   </p>
                   <p className="text-xl sm:text-2xl text-gray-800 leading-relaxed">
-                    Before starting Little Legends, Kellie spent over a decade in enterprise sales and account management, helping businesses grow across Southern California. She also managed a salon for more than six years, gaining firsthand experience in styling, customer care, and what families truly value in personal care.
+                    Before starting Little Legends, I spent over a decade in enterprise sales and account management, helping businesses grow across Southern California. I also managed a salon for more than six years, gaining firsthand experience in styling, customer care, and what families truly value in personal care.
                   </p>
                   <p className="text-xl sm:text-2xl text-gray-800 leading-relaxed">
-                    She’s a certified Pilates instructor who brings a mindset of balance, discipline, and wellness into everything she builds.
+                    I’m a certified Pilates instructor who brings a mindset of balance, discipline, and wellness into everything I build.
                   </p>
                   <p className="text-xl sm:text-2xl text-gray-800 leading-relaxed">
-                    Today, Kellie blends her business background, beauty experience, and mom perspective to create a brand that boys are proud to use and parents can trust.
+                    Today, I blend my business background, beauty experience, and mom perspective to create a brand that boys are proud to use and parents can trust.
                   </p>
                 </motion.div>
               </motion.div>

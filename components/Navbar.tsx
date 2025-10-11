@@ -27,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSneakPeekClick }) => {
           <span className="ml-2 font-bold text-ll-purple text-lg sm:text-xl">Little Legends</span>
         </Link>
         
-        <nav className="hidden portrait:hidden landscape:flex md:flex items-center justify-center flex-1 mx-4">
+        <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
           <div className="flex items-center space-x-8">
             <Link href="/" className="text-gray-700 hover:text-ll-purple transition font-medium">
               Home
@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSneakPeekClick }) => {
             Join Waitlist
           </a>
           <button
-            className="portrait:inline-flex landscape:hidden md:hidden items-center justify-center w-10 h-10 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50"
+            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50"
             aria-label="Toggle menu"
             onClick={() => setIsOpen((v) => !v)}
           >
@@ -72,21 +72,26 @@ const Navbar: React.FC<NavbarProps> = ({ onSneakPeekClick }) => {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="portrait:block landscape:hidden md:hidden absolute left-0 right-0 top-full bg-white border-t border-gray-200 shadow-md z-40">
-          <div className="flex flex-col gap-1 p-3">
-            <Link href="/" className="px-1 py-2 text-gray-700 hover:text-ll-purple transition" onClick={() => setIsOpen(false)}>Home</Link>
-            <Link href="/about" className="px-1 py-2 text-gray-700 hover:text-ll-purple transition" onClick={() => setIsOpen(false)}>About</Link>
-            <Link href="#products" className="px-1 py-2 text-gray-700 hover:text-ll-purple transition" onClick={() => setIsOpen(false)}>Products</Link>
-            {onSneakPeekClick && (
-              <button className="px-1 py-2 text-left text-gray-700 hover:text-ll-purple transition" onClick={() => { setIsOpen(false); onSneakPeekClick(); }}>
-                Sneak Peek
-              </button>
-            )}
-            <Link href="#email-signup" className="px-1 py-2">
-              <span className="inline-flex w-full items-center justify-center bg-ll-purple text-white px-4 py-2 rounded-full text-sm font-medium">Join Waitlist</span>
-            </Link>
+        <>
+          {/* backdrop to allow closing and ensure clickability */}
+          <button aria-label="Close menu" onClick={() => setIsOpen(false)} className="fixed inset-0 bg-black/20 md:hidden z-[55]" />
+          <div className="md:hidden fixed inset-x-0 top-16 bg-white border-t border-gray-200 shadow-md z-[60]">
+            <div className="flex flex-col gap-1 p-3">
+              <Link href="/" className="px-1 py-3 text-gray-700 hover:text-ll-purple transition" onClick={() => setIsOpen(false)}>Home</Link>
+              <Link href="/about" className="px-1 py-3 text-gray-700 hover:text-ll-purple transition" onClick={() => setIsOpen(false)}>About</Link>
+              <Link href="#products" className="px-1 py-3 text-gray-700 hover:text-ll-purple transition" onClick={() => setIsOpen(false)}>Products</Link>
+              {onSneakPeekClick && (
+                <button className="px-1 py-3 text-left text-gray-700 hover:text-ll-purple transition" onClick={() => { setIsOpen(false); onSneakPeekClick(); }}>
+                  Sneak Peek
+                </button>
+              )}
+              <Link href="#preorder" className="px-1 py-3 text-gray-700 hover:text-ll-purple transition" onClick={() => setIsOpen(false)}>Pre-Order</Link>
+              <Link href="#email-signup" className="px-1 py-2">
+                <span className="inline-flex w-full items-center justify-center bg-ll-purple text-white px-4 py-2 rounded-full text-sm font-medium">Join Waitlist</span>
+              </Link>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   );
