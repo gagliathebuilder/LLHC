@@ -155,7 +155,10 @@ const VideoSection: React.FC<VideoSectionProps> = ({
     >
       <div className="relative rounded-2xl overflow-hidden shadow-lg bg-black">
         {/* Video Player */}
-        <div className="relative aspect-video">
+        <div 
+          className="relative aspect-video cursor-pointer"
+          onClick={() => isTouchDevice && handlePlayPause()}
+        >
           {!videoError ? (
             <video
               id={`video-${title}`}
@@ -196,6 +199,20 @@ const VideoSection: React.FC<VideoSectionProps> = ({
             </div>
           )}
           
+          {/* Mobile Play Button Overlay - Always visible on mobile when not playing */}
+          {isTouchDevice && !isPlaying && (
+            <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handlePlayPause}
+                className="bg-white/95 backdrop-blur-sm p-6 rounded-full shadow-2xl border-4 border-white"
+              >
+                <Play className="w-8 h-8 text-gray-800 ml-1" />
+              </motion.button>
+            </div>
+          )}
+          
           {/* Overlay Controls */}
           <AnimatePresence>
             {(showControls || isTouchDevice) && (
@@ -203,14 +220,14 @@ const VideoSection: React.FC<VideoSectionProps> = ({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="absolute inset-0 bg-black/20 flex items-center justify-center"
+                className="absolute inset-0 bg-black/30 flex items-center justify-center"
               >
                 <div className="flex items-center gap-4">
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handlePlayPause}
-                    className="bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg"
+                    className="bg-white/95 backdrop-blur-sm p-4 rounded-full shadow-xl border-2 border-white"
                   >
                     {isPlaying ? (
                       <Pause className="w-6 h-6 text-gray-800" />
@@ -223,7 +240,7 @@ const VideoSection: React.FC<VideoSectionProps> = ({
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleMuteToggle}
-                    className="bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg"
+                    className="bg-white/95 backdrop-blur-sm p-4 rounded-full shadow-xl border-2 border-white"
                   >
                     {isMuted ? (
                       <VolumeX className="w-6 h-6 text-gray-800" />
