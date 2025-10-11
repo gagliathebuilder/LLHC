@@ -25,6 +25,12 @@ const VideoSection: React.FC<VideoSectionProps> = ({
   const [showControls, setShowControls] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  // Detect if device supports touch
+  React.useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   const handlePlayPause = () => {
     const video = document.getElementById(`video-${title}`) as HTMLVideoElement;
@@ -143,8 +149,9 @@ const VideoSection: React.FC<VideoSectionProps> = ({
       viewport={{ once: true }}
       transition={{ duration: 0.8 }}
       className={`relative group ${className}`}
-      onMouseEnter={() => setShowControls(true)}
-      onMouseLeave={() => setShowControls(false)}
+      onMouseEnter={() => !isTouchDevice && setShowControls(true)}
+      onMouseLeave={() => !isTouchDevice && setShowControls(false)}
+      onClick={() => isTouchDevice && setShowControls(!showControls)}
     >
       <div className="relative rounded-2xl overflow-hidden shadow-lg bg-black">
         {/* Video Player */}
@@ -191,7 +198,7 @@ const VideoSection: React.FC<VideoSectionProps> = ({
           
           {/* Overlay Controls */}
           <AnimatePresence>
-            {showControls && (
+            {(showControls || isTouchDevice) && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
