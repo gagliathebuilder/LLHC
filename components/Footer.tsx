@@ -57,7 +57,7 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-purple-700 mb-4">Little Legends</h3>
             <p className="text-sm text-gray-600">
-              Kid-approved. Parent-endorsed. Tear-free formulas and epic hold—for boys who play hard and dream big.
+              Kid-approved. Parent-endorsed. Tear-free formulas and epic hold for boys who play hard and dream big.
             </p>
           </div>
           

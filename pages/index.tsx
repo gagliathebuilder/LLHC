@@ -9,11 +9,17 @@ import AnimatedProductCard from '@/components/AnimatedProductCard';
 import VideoSection from '@/components/VideoSection';
 import SneakPeekModal from '@/components/SneakPeekModal';
 
+type SubmissionStatus = 'idle' | 'loading' | 'success' | 'error';
+
 const Home = () => {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [message, setMessage] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [waitlistEmail, setWaitlistEmail] = useState('');
+  const [waitlistStatus, setWaitlistStatus] = useState<SubmissionStatus>('idle');
+  const [waitlistMessage, setWaitlistMessage] = useState('');
+  const [waitlistEmailError, setWaitlistEmailError] = useState('');
+  const [preorderEmail, setPreorderEmail] = useState('');
+  const [preorderStatus, setPreorderStatus] = useState<SubmissionStatus>('idle');
+  const [preorderMessage, setPreorderMessage] = useState('');
+  const [preorderEmailError, setPreorderEmailError] = useState('');
   const [isSneakPeekOpen, setIsSneakPeekOpen] = useState(false);
 
   const validateEmail = (email: string) => {
@@ -21,13 +27,14 @@ const Home = () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setEmailError('');
-    if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address.');
-      return;
-    }
+  const submitEmail = async (
+    emailValue: string,
+    setStatus: React.Dispatch<React.SetStateAction<SubmissionStatus>>,
+    setMessage: React.Dispatch<React.SetStateAction<string>>,
+    setEmailValue: React.Dispatch<React.SetStateAction<string>>,
+    copy: { already?: string; success?: string } = {}
+  ) => {
+    setMessage('');
     setStatus('loading');
 
     try {
@@ -36,7 +43,7 @@ const Home = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: emailValue }),
       });
 
       const data = await response.json();
@@ -46,15 +53,40 @@ const Home = () => {
       }
 
       setStatus('success');
-      setMessage(data.error === 'Email already subscribed' 
-        ? "You're already part of the Legend Club!" 
-        : "You're in. Welcome to the Legend Club!");
-      setEmail('');
+      setMessage(
+        data.error === 'Email already subscribed'
+          ? copy.already ?? "You're already part of the Legend Club!"
+          : copy.success ?? "You're in. Welcome to the Legend Club!"
+      );
+      setEmailValue('');
     } catch (error: any) {
       console.error('Subscription error:', error);
       setStatus('error');
       setMessage(error.message || 'Oops! Something went wrong. Please try again.');
     }
+  };
+
+  const handleWaitlistSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setWaitlistEmailError('');
+    if (!validateEmail(waitlistEmail)) {
+      setWaitlistEmailError('Please enter a valid email address.');
+      return;
+    }
+    await submitEmail(waitlistEmail, setWaitlistStatus, setWaitlistMessage, setWaitlistEmail);
+  };
+
+  const handlePreorderSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPreorderEmailError('');
+    if (!validateEmail(preorderEmail)) {
+      setPreorderEmailError('Please enter a valid email address.');
+      return;
+    }
+    await submitEmail(preorderEmail, setPreorderStatus, setPreorderMessage, setPreorderEmail, {
+      already: "You're already locked in for our launch!",
+      success: "Pre-order unlocked! We'll email you with next steps.",
+    });
   };
 
   // Product data
@@ -156,7 +188,7 @@ const Home = () => {
 
                 {/* H2 Subheadline */}
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-ll-purple-dark font-fredoka">
-                  Clean. Fun. Thoughtfully crafted—for the boys.
+                  Clean. Fun. Thoughtfully crafted for the boys.
                 </h2>
 
                 {/* Body Copy and Supporting Text */}
@@ -172,34 +204,38 @@ const Home = () => {
 
               {/* Email Signup Form */}
               <motion.div
+                id="email-signup"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="w-full max-w-xl mx-auto mt-6"
               >
-                <form onSubmit={handleSubmit} className="flex flex-col items-center gap-3">
+                <h3 className="text-lg sm:text-xl font-semibold text-ll-purple-dark font-fredoka mb-2">
+                  Join the movement. Get first dibs when we drop.
+                </h3>
+                <form onSubmit={handleWaitlistSubmit} className="flex flex-col items-center gap-3">
                   <div className="flex flex-col sm:flex-row w-full items-center gap-2">
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className={`w-full sm:flex-1 px-5 py-3 rounded-full border border-ll-purple/30 focus:ring-2 focus:ring-ll-purple/40 focus:outline-none text-base ${emailError ? 'border-red-400' : ''}`}
-                      value={email}
+                      className={`w-full sm:flex-1 px-5 py-3 rounded-full border border-ll-purple/30 focus:ring-2 focus:ring-ll-purple/40 focus:outline-none text-base ${waitlistEmailError ? 'border-red-400' : ''}`}
+                      value={waitlistEmail}
                       onChange={(e) => {
-                        setEmail(e.target.value);
+                        setWaitlistEmail(e.target.value);
                         if (e.target.value === '' || validateEmail(e.target.value)) {
-                          setEmailError('');
+                          setWaitlistEmailError('');
                         } else {
-                          setEmailError('Please enter a valid email address.');
+                          setWaitlistEmailError('Please enter a valid email address.');
                         }
                       }}
                       required
-                      disabled={status === 'loading' || status === 'success'}
-                      aria-invalid={!!emailError}
-                      aria-describedby="email-error"
+                      disabled={waitlistStatus === 'loading' || waitlistStatus === 'success'}
+                      aria-invalid={!!waitlistEmailError}
+                      aria-describedby="waitlist-email-error"
                     />
                     <button
                       type="submit"
-                      disabled={status === 'loading' || status === 'success' || !validateEmail(email)}
+                      disabled={waitlistStatus === 'loading' || waitlistStatus === 'success' || !validateEmail(waitlistEmail)}
                       className="w-14 h-14 flex items-center justify-center bg-white border-2 border-purple-600 rounded-full shadow-md hover:bg-purple-50 transition-transform transform hover:scale-110 ml-0 sm:ml-2"
                       aria-label="Submit email"
                     >
@@ -207,14 +243,14 @@ const Home = () => {
                     </button>
                   </div>
                   
-                  {message && (
-                    <div className={`text-lg ${status === 'error' ? 'text-red-500' : 'text-green-600'}`}>
-                      {message}
+                  {waitlistMessage && (
+                    <div className={`text-lg ${waitlistStatus === 'error' ? 'text-red-500' : 'text-green-600'}`}>
+                      {waitlistMessage}
                     </div>
                   )}
 
-                  {emailError && (
-                    <div id="email-error" className="text-red-500 text-sm font-semibold mt-1">Please enter a valid email address.</div>
+                  {waitlistEmailError && (
+                    <div id="waitlist-email-error" className="text-red-500 text-sm font-semibold mt-1">Please enter a valid email address.</div>
                   )}
 
                   <p className="text-sm text-gray-500 font-medium">
@@ -224,6 +260,91 @@ const Home = () => {
               </motion.div>
             </div>
           </div>
+
+          {/* Pre-Order Section */}
+          <motion.section
+            id="preorder"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="w-full py-12 sm:py-16 bg-gradient-to-br from-ll-purple/10 via-white to-ll-purple/5"
+          >
+            <div className="max-w-5xl mx-auto px-4 sm:px-6">
+              <div className="bg-white/90 backdrop-blur-sm shadow-[0_20px_45px_rgba(67,38,176,0.12)] rounded-3xl p-6 sm:p-10 md:p-12">
+                <div className="flex flex-col md:flex-row md:items-center gap-6 sm:gap-8">
+                  <div className="md:w-1/2 space-y-4">
+                    <p className="text-sm uppercase tracking-[0.25em] text-ll-purple/70 font-semibold">
+                      Pre-Order Drop
+                    </p>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-fredoka font-bold text-ll-purple">
+                      Reserve Your Legendary Launch Kit
+                    </h2>
+                    <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+                      Be first in line for clean ingredients, fearless hold, and limited-edition packaging made for your little legend&apos;s daily adventures.
+                    </p>
+                    <ul className="space-y-2 text-sm sm:text-base text-gray-600">
+                      <li>• Exclusive early-access bundles and bonuses</li>
+                      <li>• Guaranteed ship dates before the public release</li>
+                      <li>• Members-only updates from our founder Kellie</li>
+                    </ul>
+                  </div>
+                  <div className="md:w-1/2 bg-[#FDF8F5] border border-ll-purple/10 rounded-2xl p-6 sm:p-8 flex flex-col gap-4">
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-ll-purple-dark font-fredoka">
+                        How Pre-Order Works
+                      </h3>
+                      <p className="mt-2 text-sm sm:text-base text-gray-600">
+                        Join the waitlist, lock your spot, and we&apos;ll email you the moment pre-orders open. No commitment until you say go.
+                      </p>
+                    </div>
+                    <form onSubmit={handlePreorderSubmit} className="flex flex-col items-stretch gap-3">
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <input
+                          type="email"
+                          placeholder="Enter your email"
+                          className={`w-full sm:flex-1 px-4 py-3 rounded-full border border-ll-purple/30 focus:ring-2 focus:ring-ll-purple/30 focus:outline-none text-base ${preorderEmailError ? 'border-red-400' : ''}`}
+                          value={preorderEmail}
+                          onChange={(e) => {
+                            setPreorderEmail(e.target.value);
+                            if (e.target.value === '' || validateEmail(e.target.value)) {
+                              setPreorderEmailError('');
+                            } else {
+                              setPreorderEmailError('Please enter a valid email address.');
+                            }
+                          }}
+                          required
+                          disabled={preorderStatus === 'loading' || preorderStatus === 'success'}
+                          aria-invalid={!!preorderEmailError}
+                          aria-describedby="preorder-email-error"
+                        />
+                        <button
+                          type="submit"
+                          disabled={preorderStatus === 'loading' || preorderStatus === 'success' || !validateEmail(preorderEmail)}
+                          className="px-6 py-3 bg-gradient-to-r from-ll-purple via-ll-purple to-[#32D083] text-white font-semibold rounded-full shadow-lg shadow-ll-purple/20 hover:from-[#5C3FE6] hover:to-[#39E099] transition-transform transform hover:translate-y-[-2px] disabled:opacity-100 disabled:cursor-not-allowed disabled:translate-y-0"
+                        >
+                          {preorderStatus === 'loading' ? 'Reserving...' : 'Reserve My Spot'}
+                        </button>
+                      </div>
+                      {preorderMessage && (
+                        <div className={`text-sm sm:text-base ${preorderStatus === 'error' ? 'text-red-500' : 'text-green-600'}`}>
+                          {preorderMessage}
+                        </div>
+                      )}
+                      {preorderEmailError && (
+                        <div id="preorder-email-error" className="text-red-500 text-xs sm:text-sm font-semibold">
+                          Please enter a valid email address.
+                        </div>
+                      )}
+                    </form>
+                    <p className="text-xs sm:text-sm text-gray-500">
+                      Already signed up? You&apos;re on the list—watch your inbox for launch-day perks.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.section>
 
           {/* Legendary Products Section */}
           <div className="w-full py-12 sm:py-16 bg-white" id="products">
@@ -239,7 +360,7 @@ const Home = () => {
                   Big Style for our Little Sidekicks.
                 </h2>
                 <p className="text-base sm:text-lg text-gray-600 mt-4 text-center">
-                  Coming soon — and totally worth the wait.
+                  Coming soon and totally worth the wait.
                 </p>
               </motion.div>
               
@@ -337,7 +458,7 @@ const Home = () => {
               {/* Subtle divider */}
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-ll-purple/10 to-transparent"></div>
               
-              <div className="bg-gradient-to-br from-ll-purple/5 to-ll-purple/10 p-8 sm:p-12 rounded-2xl max-w-4xl mx-auto text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]" id="about">
+              <div className="bg-[#0CD5D8] p-8 sm:p-12 rounded-2xl max-w-4xl mx-auto text-center shadow-[0_4px_20px_rgba(0,0,0,0.08)]" id="about">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -348,52 +469,51 @@ const Home = () => {
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-6">
                     <motion.div 
                       whileHover={{ scale: 1.05 }}
-                      className="text-ll-purple font-extrabold text-xl sm:text-2xl tracking-tight"
+                      className="text-[#FF2EBE] font-extrabold text-xl sm:text-2xl tracking-tight"
                     >
-                      Dad Built
+                      Mom Built
                     </motion.div>
-                    <span className="hidden sm:block text-ll-purple/30">•</span>
+                    <span className="hidden sm:block text-[#4326B0] opacity-70">•</span>
                     <motion.div 
                       whileHover={{ scale: 1.05 }}
-                      className="text-ll-purple font-extrabold text-xl sm:text-2xl tracking-tight"
+                      className="text-[#FF2EBE] font-extrabold text-xl sm:text-2xl tracking-tight"
                     >
                       Kid Tested
                     </motion.div>
-                    <span className="hidden sm:block text-ll-purple/30">•</span>
+                    <span className="hidden sm:block text-[#4326B0] opacity-70">•</span>
                     <motion.div 
                       whileHover={{ scale: 1.05 }}
-                      className="text-ll-purple font-extrabold text-xl sm:text-2xl tracking-tight"
+                      className="text-[#FF2EBE] font-extrabold text-xl sm:text-2xl tracking-tight"
                     >
-                      Mom Approved
+                      Dad Approved
                     </motion.div>
                   </div>
 
-                  <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-sm">
-                    <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
-                      At Little Legends, we get it. Getting kids out the door with great hair shouldn't be a struggle.
-                      We're dads who've been there—and kids who know what works. Our mission: epic style, safe ingredients,
-                      and hair products boys actually want to use.
+                  <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-sm">
+                    <p className="text-[#3B1E7C] text-base sm:text-lg leading-relaxed">
+                      At Little Legends, we get it. Our founder Kellie set out to fix the bathroom routine with clean, effective products that keep up with real families.
+                      Every formula is kid tested and mom approved, delivering epic style, safe ingredients, and hair products boys actually want to use.
                     </p>
                   </div>
 
                   <div className="flex flex-wrap justify-center gap-4 mt-6">
                     <motion.div 
                       whileHover={{ scale: 1.05 }}
-                      className="bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm"
+                      className="bg-white/90 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm border border-[#FF2EBE]/40"
                     >
-                      <span className="text-sm font-medium text-gray-700">Safe & Natural</span>
+                      <span className="text-sm font-medium text-[#3B1E7C]">Safe & Natural</span>
                     </motion.div>
                     <motion.div 
                       whileHover={{ scale: 1.05 }}
-                      className="bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm"
+                      className="bg-white/90 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm border border-[#FF2EBE]/40"
                     >
-                      <span className="text-sm font-medium text-gray-700">Tear-Free Formula</span>
+                      <span className="text-sm font-medium text-[#3B1E7C]">Tear-Free Formula</span>
                     </motion.div>
                     <motion.div 
                       whileHover={{ scale: 1.05 }}
-                      className="bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm"
+                      className="bg-white/90 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm border border-[#FF2EBE]/40"
                     >
-                      <span className="text-sm font-medium text-gray-700">Easy Washout</span>
+                      <span className="text-sm font-medium text-[#3B1E7C]">Easy Washout</span>
                     </motion.div>
                   </div>
                 </motion.div>

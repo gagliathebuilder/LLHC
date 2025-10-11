@@ -29,11 +29,11 @@ const Navbar: React.FC<NavbarProps> = ({ onSneakPeekClick }) => {
             <Link href="/" className="text-gray-700 hover:text-ll-purple transition font-medium">
               Home
             </Link>
-            <Link href="#products" className="text-gray-700 hover:text-ll-purple transition font-medium">
-              Products
-            </Link>
             <Link href="/about" className="text-gray-700 hover:text-ll-purple transition font-medium">
               About
+            </Link>
+            <Link href="#products" className="text-gray-700 hover:text-ll-purple transition font-medium">
+              Products
             </Link>
             {onSneakPeekClick && (
               <button
@@ -44,6 +44,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSneakPeekClick }) => {
                 Sneak Peek
               </button>
             )}
+            <Link href="#preorder" className="text-gray-700 hover:text-ll-purple transition font-medium">
+              Pre-Order
+            </Link>
           </div>
         </nav>
         

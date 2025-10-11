@@ -155,7 +155,7 @@ export default function ProductGrid() {
               Big Style for our Little Sidekicks
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Coming soon — and totally worth the wait. Each product is crafted with care for the little legends in your life.
+              Coming soon and totally worth the wait. Each product is crafted with care for the little legends in your life.
             </p>
           </motion.div>
 
