@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSneakPeekClick }) => {
               style={{ objectFit: 'contain' }}
             />
           </div>
-          <span className="ml-2 font-bold text-ll-purple text-lg sm:text-xl">Little Legends</span>
+          <span className="ml-2 font-bold text-ll-purple text-lg sm:text-xl">Little Legends<sup className="text-xs">™</sup></span>
         </Link>
         
         <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
